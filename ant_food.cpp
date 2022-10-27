@@ -41,11 +41,11 @@ Ant::Ant(double x0,double y0, bool food){
 
 //define the direction the ant can take at each point
 void Ant::setMoves(std::vector<std::array<double,2>> hops){
-    for (std::array <double,2> hop: hops)
+    for (std::array <double,2> hop: hops){
         moves.push_back(hop);
         //print the moves to test they are correctly saved
         //printf("moves are: (%g,%g)\n",hop[0],hop[1]);
-    
+    }
     
 }
 //define the location of the food
@@ -59,7 +59,9 @@ void Ant::Move(void){
     int getrand = rand()%4;
     current_loc[0] += moves[getrand][0];
     current_loc[1] += moves[getrand][1];
-    //printf("next location is (%g,%g)\n",current_loc[0],current_loc[1]);
+#ifdef Moves
+    printf("next location is (%g,%g)\n",current_loc[0],current_loc[1]);
+#endif
     
 }
 
@@ -103,7 +105,7 @@ bool Ant::foodChecker(){
 
 
 void Ant::goForage(int nsearches){
-    printf("\nsearching for food");
+    printf("\nsearching for food\n");
     int steps = 0;
     srand(time(0));
     bool food=0;
@@ -125,6 +127,9 @@ void Ant::goForage(int nsearches){
 //                    printf("To far from hill, going back!!\n");
             }
         }
+#ifdef Moves
+        printf("\n");
+#endif
         current_loc[0] = init_loc[0];
         current_loc[1] = init_loc[1];
 //        printf("number of steps = %d\n",steps);
